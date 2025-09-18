@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Burger introuvable{% endblock %}
+
+{% block body %}
+    <h1>Oups ! Burger introuvable</h1>
+    <p>Le burger avec l’ID {{ id }} n’existe pas.</p>
+    <a href="{{ path('burgers_list') }}">← Retour à la liste des burgers</a>
+{% endblock %}

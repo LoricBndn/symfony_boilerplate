@@ -31,9 +31,10 @@ class BurgerController extends AbstractController
             3 => ['nom' => 'Vegan Burger', 'description' => 'Un burger 100% végétal', 'prix' => 9],
         ];
 
-        // Vérifier si l'ID existe
         if (!isset($burgers[$id])) {
-            throw $this->createNotFoundException("Burger avec l'ID $id introuvable !");
+            return $this->render('burger_not_found.html.twig', [
+                'id' => $id
+            ]);
         }
 
         return $this->render('burger_show.html.twig', [
