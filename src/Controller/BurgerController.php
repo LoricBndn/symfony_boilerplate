@@ -11,6 +11,34 @@ class BurgerController extends AbstractController
     #[Route('/burgers', name: 'burgers_list')]
     public function list(): Response
     {
-        return $this->render('burgers_list.html.twig');
+        $burgers = [
+            1 => ['nom' => 'CheeseBurger', 'description' => 'Un classique avec fromage fondu', 'prix' => 8],
+            2 => ['nom' => 'Double Steak', 'description' => 'Deux steaks généreux avec cheddar', 'prix' => 10],
+            3 => ['nom' => 'Vegan Burger', 'description' => 'Un burger 100% végétal', 'prix' => 9],
+        ];
+
+        return $this->render('burgers_list.html.twig', [
+            'burgers' => $burgers
+        ]);
+    }
+
+    #[Route('/burger/{id}', name: 'burger_show')]
+    public function show(int $id): Response
+    {
+        $burgers = [
+            1 => ['nom' => 'CheeseBurger', 'description' => 'Un classique avec fromage fondu', 'prix' => 8],
+            2 => ['nom' => 'Double Steak', 'description' => 'Deux steaks généreux avec cheddar', 'prix' => 10],
+            3 => ['nom' => 'Vegan Burger', 'description' => 'Un burger 100% végétal', 'prix' => 9],
+        ];
+
+        // Vérifier si l'ID existe
+        if (!isset($burgers[$id])) {
+            throw $this->createNotFoundException("Burger avec l'ID $id introuvable !");
+        }
+
+        return $this->render('burger_show.html.twig', [
+            'id' => $id,
+            'burger' => $burgers[$id],
+        ]);
     }
 }

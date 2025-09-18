@@ -4,5 +4,13 @@
 
 {% block body %}
     <h1>Liste des burgers</h1>
-    <p>Ici, nous afficherons bientôt nos burgers.</p>
+    <ul>
+        {% for id, burger in burgers %}
+            <li>
+                <a href="{{ path('burger_show', {id: id}) }}">
+                    {{ burger.nom }} - {{ burger.prix }} €
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}
