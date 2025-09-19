@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block body %}
-    {% if burger %}
-        <h1>{{ burger.nom }}</h1>
-        <p><strong>Description :</strong> {{ burger.description }}</p>
-        <p><strong>Prix :</strong> {{ burger.prix }} €</p>
-
-        <p>Vous regardez les détails du burger ID : {{ id }}</p>
-        <a href="{{ path('burgers_list') }}">← Retour à la liste</a>
-    {% else %}
-        <h1>Oups ! Burger introuvable</h1>
-        <p>Le burger avec l’ID {{ id }} n’existe pas.</p>
-        <a href="{{ path('burgers_list') }}">← Retour à la liste des burgers</a>
-    {% endif %}
+    <main class="burger-detail">
+        {% if burger %}
+            <h2>{{ burger.nom }}</h2>
+            <p><strong>Description :</strong> {{ burger.description }}</p>
+            <p><strong>Prix :</strong> {{ burger.prix }} €</p>
+            <a href="{{ path('burgers_list') }}">← Retour à la liste</a>
+        {% else %}
+            <h2>Oups ! Burger introuvable</h2>
+            <p>Le burger avec l’ID {{ id }} n’existe pas.</p>
+            <a href="{{ path('burgers_list') }}">← Retour à la liste des burgers</a>
+        {% endif %}
+    </main>
 {% endblock %}

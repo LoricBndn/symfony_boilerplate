@@ -1,16 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Burgers - CRUDcroustillant{% endblock %}
+{% block title %}Nos Burgers - CRUDcroustillant{% endblock %}
 
 {% block body %}
-    <h1>Liste des burgers</h1>
-    <ul>
-        {% for id, burger in burgers %}
-            <li>
-                <a href="{{ path('burger_show', {id: id}) }}">
-                    {{ burger.nom }} - {{ burger.prix }} €
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <main>
+        <h2>Liste des burgers</h2>
+        <ul class="burger-list">
+            {% for id, burger in burgers %}
+                <li>
+                    <a href="{{ path('burger_show', {id: id}) }}">
+                        {{ burger.nom }} - {{ burger.prix }} €
+                    </a>
+                </li>
+            {% else %}
+                <li>Aucun burger trouvé.</li>
+            {% endfor %}
+        </ul>
+    </main>
 {% endblock %}

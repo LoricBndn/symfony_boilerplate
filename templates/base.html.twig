@@ -2,13 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}CRUDcroustillant{% endblock %}</title>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
     </head>
     <body>
-        {% include '_header.html.twig' %}
+        <div class="page-container">
+            {% include '_header.html.twig' %}
 
-        {% block body %}{% endblock %}
+            <main class="content">
+                {% block body %}{% endblock %}
+            </main>
 
-        {% include '_footer.html.twig' %}
+            {% include '_footer.html.twig' %}
+        </div>
     </body>
 </html>
