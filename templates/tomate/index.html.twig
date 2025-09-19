@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Tomates{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Tomates</h2>
+
+    {% if tomates|length > 0 %}
+        <div class="cards-container">
+            {% for tomate in tomates %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>{{ tomate.name }}</h3>
+                        <p>ID : {{ tomate.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucune tomate trouvée.</p>
+    {% endif %}
+</main>
+{% endblock %}

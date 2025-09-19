@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Images{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Images</h2>
+
+    {% if images|length > 0 %}
+        <div class="cards-container">
+            {% for image in images %}
+                <div class="card">
+                    {% if image.name %}
+                        <img src="{{ asset(image.name) }}" alt="Image {{ image.id }}" class="card-img">
+                    {% else %}
+                        <div class="card-placeholder" style="height:150px; display:flex; align-items:center; justify-content:center; background:#bdc3c7;">
+                            Pas d'image
+                        </div>
+                    {% endif %}
+                    <div class="card-info">
+                        <p>ID : {{ image.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucune image trouvée.</p>
+    {% endif %}
+</main>
+{% endblock %}

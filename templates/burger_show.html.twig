@@ -2,23 +2,67 @@
 
 {% block title %}
     {% if burger %}
-        Burger {{ burger.nom }}
+        Burger {{ burger.name }}
     {% else %}
         Burger introuvable
     {% endif %}
 {% endblock %}
 
 {% block body %}
-    <main class="burger-detail">
-        {% if burger %}
-            <h2>{{ burger.nom }}</h2>
-            <p><strong>Description :</strong> {{ burger.description }}</p>
-            <p><strong>Prix :</strong> {{ burger.prix }} €</p>
-            <a href="{{ path('burgers_list') }}">← Retour à la liste</a>
-        {% else %}
-            <h2>Oups ! Burger introuvable</h2>
-            <p>Le burger avec l’ID {{ id }} n’existe pas.</p>
-            <a href="{{ path('burgers_list') }}">← Retour à la liste des burgers</a>
+<main class="burger-detail">
+    {% if burger %}
+        <h2>{{ burger.name }}</h2>
+
+        {% if burger.image %}
+            <img src="{{ asset(burger.image.name) }}" alt="{{ burger.name }}" class="burger-image" style="max-width:300px;">
         {% endif %}
-    </main>
+
+        <p><strong>Ingrédients :</strong>
+            {% set ingredients = [] %}
+
+            {% for viande in burger.viandes %}
+                {% set ingredients = ingredients|merge([viande.name]) %}
+            {% endfor %}
+            {% for poulet in burger.poulets %}
+                {% set ingredients = ingredients|merge([poulet.name]) %}
+            {% endfor %}
+            {% for fromage in burger.fromages %}
+                {% set ingredients = ingredients|merge([fromage.name]) %}
+            {% endfor %}
+            {% for salade in burger.salades %}
+                {% set ingredients = ingredients|merge([salade.name]) %}
+            {% endfor %}
+            {% for oignon in burger.oignons %}
+                {% set ingredients = ingredients|merge([oignon.name]) %}
+            {% endfor %}
+            {% for cornichon in burger.cornichons %}
+                {% set ingredients = ingredients|merge([cornichon.name]) %}
+            {% endfor %}
+            {% for tomate in burger.tomates %}
+                {% set ingredients = ingredients|merge([tomate.name]) %}
+            {% endfor %}
+            {% for bacon in burger.bacons %}
+                {% set ingredients = ingredients|merge([bacon.name]) %}
+            {% endfor %}
+            {% for poisson in burger.poissons %}
+                {% set ingredients = ingredients|merge([poisson.name]) %}
+            {% endfor %}
+            {% for oeuf in burger.oeufs %}
+                {% set ingredients = ingredients|merge([oeuf.name]) %}
+            {% endfor %}
+            {% for sauce in burger.sauces %}
+                {% set ingredients = ingredients|merge([sauce.name]) %}
+            {% endfor %}
+
+            {{ ingredients|join(', ') }}
+        </p>
+
+        <p><strong>Prix :</strong> {{ burger.price }} €</p>
+        <a href="{{ path('burgers_list') }}">← Retour à la liste</a>
+    {% else %}
+        <h2>Oups ! Burger introuvable</h2>
+        <p>Le burger avec l’ID {{ id }} n’existe pas.</p>
+        <a href="{{ path('burgers_list') }}">← Retour à la liste des burgers</a>
+    {% endif %}
+</main>
 {% endblock %}

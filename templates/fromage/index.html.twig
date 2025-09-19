@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Fromages{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Fromages</h2>
+
+    {% if fromages|length > 0 %}
+        <div class="cards-container">
+            {% for fromage in fromages %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>{{ fromage.name }}</h3>
+                        <p>ID : {{ fromage.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun fromage trouvé.</p>
+    {% endif %}
+</main>
+{% endblock %}

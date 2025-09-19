@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Poissons{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Poissons</h2>
+
+    {% if poissons|length > 0 %}
+        <div class="cards-container">
+            {% for poisson in poissons %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>{{ poisson.name }}</h3>
+                        <p>ID : {{ poisson.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun poisson trouvé.</p>
+    {% endif %}
+</main>
+{% endblock %}

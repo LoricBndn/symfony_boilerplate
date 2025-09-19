@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Commentaires{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Commentaires</h2>
+
+    {% if commentaires|length > 0 %}
+        <div class="cards-container">
+            {% for commentaire in commentaires %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>{{ commentaire.name }}</h3>
+                        <p>ID : {{ commentaire.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucun commentaire trouvé.</p>
+    {% endif %}
+</main>
+{% endblock %}

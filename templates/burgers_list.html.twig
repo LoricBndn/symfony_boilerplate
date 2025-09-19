@@ -3,18 +3,29 @@
 {% block title %}Nos Burgers - CRUDcroustillant{% endblock %}
 
 {% block body %}
-    <main>
-        <h2>Liste des burgers</h2>
-        <ul class="burger-list">
-            {% for id, burger in burgers %}
-                <li>
-                    <a href="{{ path('burger_show', {id: id}) }}">
-                        {{ burger.nom }} - {{ burger.prix }} €
+<main class="page-container content">
+    <h2 class="text-center my-4">Liste des Burgers</h2>
+
+    {% if burgers|length > 0 %}
+        <div class="burger-cards">
+            {% for burger in burgers %}
+                <div class="burger-card">
+                    <a href="{{ path('burger_show', {id: burger.id}) }}">
+                        {% if burger.image %}
+                            <img src="{{ asset(burger.image.name) }}" alt="{{ burger.name }}">
+                        {% else %}
+                            <div class="burger-placeholder">Pas d'image</div>
+                        {% endif %}
+                        <div class="burger-info">
+                            <h3>{{ burger.name }}</h3>
+                            <p>{{ burger.price }} €</p>
+                        </div>
                     </a>
-                </li>
-            {% else %}
-                <li>Aucun burger trouvé.</li>
+                </div>
             {% endfor %}
-        </ul>
-    </main>
+        </div>
+    {% else %}
+        <p class="text-center">Aucun burger trouvé.</p>
+    {% endif %}
+</main>
 {% endblock %}

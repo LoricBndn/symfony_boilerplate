@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Sauces{% endblock %}
+
+{% block body %}
+<main class="page-container content">
+    <h2>Liste des Sauces</h2>
+
+    {% if sauces|length > 0 %}
+        <div class="cards-container">
+            {% for sauce in sauces %}
+                <div class="card">
+                    <div class="card-info">
+                        <h3>{{ sauce.name }}</h3>
+                        <p>ID : {{ sauce.id }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucune sauce trouvée.</p>
+    {% endif %}
+</main>
+{% endblock %}
