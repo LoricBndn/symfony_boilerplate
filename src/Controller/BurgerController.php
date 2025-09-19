@@ -31,15 +31,11 @@ class BurgerController extends AbstractController
             3 => ['nom' => 'Vegan Burger', 'description' => 'Un burger 100% végétal', 'prix' => 9],
         ];
 
-        if (!isset($burgers[$id])) {
-            return $this->render('burger_not_found.html.twig', [
-                'id' => $id
-            ]);
-        }
+        $burger = $burgers[$id] ?? null;
 
         return $this->render('burger_show.html.twig', [
             'id' => $id,
-            'burger' => $burgers[$id],
+            'burger' => $burger,
         ]);
     }
 }
