@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}CRUDcroustillant{% endblock %}</title>
     </head>
     <body>
-        <nav>
-            <a href="{{ path('home') }}">Accueil</a> |
-            <a href="{{ path('burgers_list') }}">Nos Burgers</a>
-        </nav>
-
-        <hr>
+        {% include '_header.html.twig' %}
 
         {% block body %}{% endblock %}
+
+        {% include '_footer.html.twig' %}
     </body>
 </html>
-
