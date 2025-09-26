@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Burger;
 use App\Entity\Pain;
+use App\Repository\BurgerRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,8 +16,24 @@ class BurgerController extends AbstractController
     #[Route('/burgers', name: 'burgers_list')]
     public function list(ManagerRegistry $doctrine): Response
     {
-        // Récupère tous les burgers depuis la BDD
         $burgers = $doctrine->getRepository(Burger::class)->findAll();
+
+        return $this->render('burgers_list.html.twig', [
+            'burgers' => $burgers,
+        ]);
+    }
+
+    #[Route('/burgers/search', name: 'burgers_by_ingredient')]
+    public function searchByIngredient(Request $request, BurgerRepository $burgerRepo): Response
+    {
+        $ingredient = $request->query->get('ingredient');
+
+        if (!$ingredient) {
+            $this->addFlash('error', "Veuillez saisir un ingrédient pour la recherche.");
+            return $this->redirectToRoute('burgers_list');
+        }
+
+        $burgers = $burgerRepo->findBurgersWithIngredient($ingredient);
 
         return $this->render('burgers_list.html.twig', [
             'burgers' => $burgers,

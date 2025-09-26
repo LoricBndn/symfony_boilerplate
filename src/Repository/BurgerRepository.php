@@ -16,28 +16,25 @@ class BurgerRepository extends ServiceEntityRepository
         parent::__construct($registry, Burger::class);
     }
 
-    //    /**
-    //     * @return Burger[] Returns an array of Burger objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('b.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Burger
-    //    {
-    //        return $this->createQueryBuilder('b')
-    //            ->andWhere('b.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Retourne les burgers contenant un ingrédient spécifique
+     *
+     * @param string $ingredient
+     * @return Burger[]
+     */
+    public function findBurgersWithIngredient(string $ingredient): array
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.pain', 'p')
+            ->leftJoin('b.garnitures', 'g')
+            ->leftJoin('b.sauces', 's')
+            ->leftJoin('b.viandes', 'v')
+            ->where('LOWER(p.name) LIKE :ingredient')
+            ->orWhere('LOWER(g.name) LIKE :ingredient')
+            ->orWhere('LOWER(s.name) LIKE :ingredient')
+            ->orWhere('LOWER(v.name) LIKE :ingredient')
+            ->setParameter('ingredient', '%' . strtolower($ingredient) . '%')
+            ->getQuery()
+            ->getResult();
+    }
 }

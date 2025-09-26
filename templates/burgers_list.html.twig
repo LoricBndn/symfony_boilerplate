@@ -6,7 +6,17 @@
 <main class="page-container content">
     <h2 class="text-center my-4">Liste des Burgers</h2>
 
-    <div class="btn-container">
+    <!-- Formulaire de recherche -->
+    <div class="search-container text-center mb-4">
+        <form action="{{ path('burgers_by_ingredient', {'ingredient': ''}) }}" method="get" style="display:inline-block;">
+            <input type="text" name="ingredient" placeholder="Chercher un ingrédient"
+                   required style="padding:0.5rem; border-radius:5px; border:1px solid #ccc;">
+            <button type="submit" class="btn btn-primary">🔍 Rechercher</button>
+        </form>
+    </div>
+
+    <!-- Bouton création -->
+    <div class="btn-container text-center mb-4">
         <a href="{{ path('burger_create') }}" class="btn btn-primary"
            onclick="return confirm('Voulez-vous vraiment créer un burger ?');">
             ➕ Créer
