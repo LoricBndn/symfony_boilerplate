@@ -6,6 +6,13 @@
 <main class="page-container content">
     <h2 class="text-center my-4">Liste des Burgers</h2>
 
+    <div class="btn-container">
+        <a href="{{ path('burger_create') }}" class="btn btn-primary"
+           onclick="return confirm('Voulez-vous vraiment créer un burger ?');">
+            ➕ Créer
+        </a>
+    </div>
+
     {% if burgers|length > 0 %}
         <div class="burger-cards">
             {% for burger in burgers %}
@@ -21,6 +28,16 @@
                             <p>{{ burger.price }} €</p>
                         </div>
                     </a>
+                    <div class="burger-actions">
+                        <a href="{{ path('burger_edit', {id: burger.id}) }}" class="btn btn-secondary"
+                           onclick="return confirm('Voulez-vous vraiment modifier ce burger ?');">
+                            ✏️ Modifier
+                        </a>
+                        <a href="{{ path('burger_delete', {id: burger.id}) }}" class="btn btn-danger"
+                           onclick="return confirm('Voulez-vous vraiment supprimer ce burger ?');">
+                            🗑 Supprimer
+                        </a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
