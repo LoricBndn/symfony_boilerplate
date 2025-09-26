@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des Salades{% endblock %}
+{% block title %}Liste des Garnitures{% endblock %}
 
 {% block body %}
 <main class="page-container content">
-    <h2>Liste des Salades</h2>
+    <h2>Liste des Garnitures</h2>
 
-    {% if salades|length > 0 %}
+    {% if garnitures|length > 0 %}
         <div class="cards-container">
-            {% for salade in salades %}
+            {% for garniture in garnitures %}
                 <div class="card">
                     <div class="card-info">
-                        <h3>{{ salade.name }}</h3>
-                        <p>ID : {{ salade.id }}</p>
+                        <h3>{{ garniture.name }}</h3>
+                        <p>ID : {{ garniture.id }}</p>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p>Aucune salade trouvée.</p>
+        <p>Aucune garniture trouvée.</p>
     {% endif %}
 </main>
 {% endblock %}

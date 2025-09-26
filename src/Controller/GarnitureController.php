@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\Cornichon;
+use App\Entity\Garniture;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CornichonController extends AbstractController
+class GarnitureController extends AbstractController
 {
-    #[Route('/cornichons', name: 'cornichons_list')]
+    #[Route('/garnitures', name: 'garnitures_list')]
     public function list(ManagerRegistry $doctrine): Response
     {
-        $cornichons = $doctrine->getRepository(Cornichon::class)->findAll();
+        $garnitures = $doctrine->getRepository(Garniture::class)->findAll();
 
-        return $this->render('cornichon/index.html.twig', [
-            'cornichons' => $cornichons,
+        return $this->render('garniture/index.html.twig', [
+            'garnitures' => $garnitures,
         ]);
     }
 }
